@@ -20,4 +20,4 @@ print "amit " + "dhamu"
 # escape
 print "I'm Amit Dhamu"
 print 'I\'m Amit Dhamu'
-print('a\nb\n\nc')
+print 'a\nb\n\nc'
