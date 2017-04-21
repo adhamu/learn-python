@@ -1,12 +1,22 @@
 #!/usr/bin/env python
 
-single_line = "amit"
+# Strings are quoted in double quotes but single quotes can just as easily be used
 
-multi_line = """Hello world
+# single line
+print "amit"
+
+# multiline
+print """
+Hello world
 This is a multiline string and can
 go on
 for lots
-of lines"""
+of lines
+"""
 
-print "Single Line: " + single_line + "\n"
-print "Multi Line: " + multi_line + "\n"
+# concat
+print "amit " + "dhamu"
+
+# escape
+print "I'm Amit Dhamu"
+print 'I\'m Amit Dhamu'
