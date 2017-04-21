@@ -33,6 +33,13 @@ fo.close()
 os.rename(new_file, new_directory + '/' + 'new-file2.txt')
 new_file = new_directory + '/' + 'new-file2.txt'
 
+# read a file
+f = open(new_file, 'r')
+print(f.read())
+
+# read line by line
+print(f.readline())
+
 # delete a file
 decide = input("delete the newly created file? ")
 if decide == 'yes' and os.path.isfile(new_file):
