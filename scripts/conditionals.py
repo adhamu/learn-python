@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 # switch
 def hello():
@@ -17,11 +17,11 @@ menu = [hello,bye,hola,adios]
 menu[1]()
 
 # if/elseif/else
-language = raw_input('Please enter a language: ')
+language = input('Please enter a language: ')
 
 if language == 'python':
-    print 'Correct'
+    print('Correct')
 elif language == 'php':
-    print 'PHP? Are you serious?'
+    print('PHP? Are you serious?')
 else:
-    print 'Incorrect. Come on, you know what we\'re writing here'
+    print('Incorrect. Come on, you know what we\'re writing here')

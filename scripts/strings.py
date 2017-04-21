@@ -1,23 +1,23 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 # Strings are quoted in double quotes but single quotes can just as easily be used
 
 # single line
-print "amit"
+print("amit")
 
 # multiline
-print """
+print("""
 Hello world
 This is a multiline string and can
 go on
 for lots
 of lines
-"""
+""")
 
 # concat
-print "amit " + "dhamu"
+print("amit " + "dhamu")
 
 # escape
-print "I'm Amit Dhamu"
-print 'I\'m Amit Dhamu'
-print 'a\nb\n\nc'
+print("I'm Amit Dhamu")
+print('I\'m Amit Dhamu')
+print('a\nb\n\nc')
