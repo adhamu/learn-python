@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+import colorful
+
 single_line = "amit"
 
 multi_line = """Hello world
