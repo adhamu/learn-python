@@ -23,14 +23,16 @@ if data:
 
     for release in item['releases']:
         if release['build'] == architecture and release['distro'] == distro:
+            label = release['label']
             downloadUrl = release['url']
             fileName = downloadUrl.rsplit('/', 1)[1]
 
     if downloadUrl:
-        print('Downloading from ' + downloadUrl)
+        print('Downloading ' + label + '\n' + fileName)
 
         if urllib.request.urlretrieve(downloadUrl, fileName):
-            subprocess.run(['ls', fileName], stdout=subprocess.PIPE)
+            subprocess.run(['dpkg', '-i', fileName])
+            subprocess.run(['rm', fileName])
 
 else:
     print('ERROR: Looks like there\'s a problem with the API response')
