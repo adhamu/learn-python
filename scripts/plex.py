@@ -1,12 +1,22 @@
 #!/usr/bin/env python3
-import urllib.request
+
+"""
+Ubuntu 64-bit Plex Media Server Updater.
+
+Downloads the latest Plex media server .deb file and installs it.
+"""
+
 import json
 import subprocess
+import urllib.request
+
 platform = "Linux"
 architecture = "linux-ubuntu-x86_64"
 distro = 'ubuntu'
 plexDownloadApi = "https://plex.tv/api/downloads/1.json?channel=plexpass"
+
 print("Looking up available downloads")
+
 try:
     with urllib.request.urlopen(plexDownloadApi) as url:
         data = json.loads(url.read())
@@ -21,6 +31,7 @@ if data:
     item = data['computer'][platform]
     releaseData = item['release_date']
     version = item['version']
+
     for release in item['releases']:
         if release['build'] == architecture and release['distro'] == distro:
             label = release['label']
@@ -28,14 +39,18 @@ if data:
             # its more 'pythonic' to use snake_case - (eventually you might want to take a look at pep8)
             fileName = downloadUrl.rsplit('/', 1)[1]
             # this file name might still have special characters or '..' or something nasty (more on this below)
-    if downloadUrl: # if downloadUrl never gets set then this will result in a NameError
+
+    if downloadUrl:  # if downloadUrl never gets set then this will result in a NameError
         print('Downloading ' + label + '\n' + fileName)
+
         if urllib.request.urlretrieve(downloadUrl, fileName):
             # I think if you omit the second arg it will securely create a named file for you in tmp (and return the name in a tuple with some other data)
-            subprocess.run(['dpkg', '-i', fileName])
-            subprocess.run(['rm', fileName])
+            subprocess.run(['ls', '-l', fileName])
+            #  subprocess.run(['dpkg', '-i', fileName])
+            #  subprocess.run(['rm', fileName])
             # use shutil.unlink instead!
             # Also this deletion should happen in a 'finally' block so it always gets deleted
+
 else:
     print('ERROR: Looks like there\'s a problem with the API response')
     # Is this indented properly? looks liek it should be the else for 'if downloadUrl'
