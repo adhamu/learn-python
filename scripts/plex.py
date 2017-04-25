@@ -7,7 +7,9 @@ Downloads the latest Plex media server .deb file and installs it.
 """
 
 import json
+import os
 import subprocess
+import sys
 import urllib.request
 
 platform = "Linux"
@@ -22,35 +24,30 @@ try:
         data = json.loads(url.read())
 except:
     print('ERROR: There was an error looking up available downloads. Please try again later')
-    # Should probably exit at this point - either by
-    # 1) not catching
-    # 2) putting 'trow' to re-throw the exception (which might have useful info about the failure after all)
-    # 3) calling sys.exit
-    # That way you don't need the if block below
-if data:
-    item = data['computer'][platform]
-    releaseData = item['release_date']
-    version = item['version']
+    sys.exit()
 
-    for release in item['releases']:
-        if release['build'] == architecture and release['distro'] == distro:
-            label = release['label']
-            downloadUrl = release['url']
-            # its more 'pythonic' to use snake_case - (eventually you might want to take a look at pep8)
-            fileName = downloadUrl.rsplit('/', 1)[1]
-            # this file name might still have special characters or '..' or something nasty (more on this below)
+item = data['computer'][platform]
+releaseData = item['release_date']
+version = item['version']
 
-    if downloadUrl:  # if downloadUrl never gets set then this will result in a NameError
-        print('Downloading ' + label + '\n' + fileName)
+for release in item['releases']:
+    if release['build'] == architecture and release['distro'] == distro:
+        label = release['label']
+        download_url = release['url']
+        file_name = download_url.rsplit('/', 1)[1]
 
-        if urllib.request.urlretrieve(downloadUrl, fileName):
-            # I think if you omit the second arg it will securely create a named file for you in tmp (and return the name in a tuple with some other data)
-            subprocess.run(['ls', '-l', fileName])
-            #  subprocess.run(['dpkg', '-i', fileName])
-            #  subprocess.run(['rm', fileName])
-            # use shutil.unlink instead!
-            # Also this deletion should happen in a 'finally' block so it always gets deleted
+if download_url and not os.path.isfile(file_name):
+    print('Downloading ' + label + '\n' + file_name)
+    urllib.request.urlretrieve(download_url, file_name)
 
+install = input('Install Plex Media Server ' + version + '? Type [Y] to continue: ')
+
+if install == 'y':
+    subprocess.run(['ls', '-l', file_name])
+    os.remove(file_name)
 else:
-    print('ERROR: Looks like there\'s a problem with the API response')
-    # Is this indented properly? looks liek it should be the else for 'if downloadUrl'
+    print('Installation aborted')
+    #  subprocess.run(['dpkg', '-i', file_name])
+    #  subprocess.run(['rm', file_name])
+    # use shutil.unlink instead!
+    # Also this deletion should happen in a 'finally' block so it always gets deleted
