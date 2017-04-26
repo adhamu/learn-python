@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import datetime
-import time
 
 t = datetime.time(1, 2, 3)
 print(t)
@@ -45,7 +44,7 @@ print('Today  :', datetime.datetime.today())
 print('UTC Now:', datetime.datetime.utcnow())
 
 d = datetime.datetime.now()
-for attr in [ 'year', 'month', 'day', 'hour', 'minute', 'second', 'microsecond']:
+for attr in ['year', 'month', 'day', 'hour', 'minute', 'second', 'microsecond']:
     print(attr, ':', getattr(d, attr))
 
 format = "%a %b %d %H:%M:%S %Y"

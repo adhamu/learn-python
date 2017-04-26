@@ -13,8 +13,8 @@ for num in range(0, 5):
 # while
 count = 0
 while (count < 9):
-   print('The count is:', count)
-   count = count + 1
+    print('The count is:', count)
+    count = count + 1
 else:
     print('The count is 9. Finishing')
 

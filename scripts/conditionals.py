@@ -1,19 +1,23 @@
 #!/usr/bin/env python3
 
-# switch
+
 def hello():
-  print ("Hello")
+    print ("Hello")
+
 
 def bye():
-  print ("Bye")
+    print ("Bye")
+
 
 def hola():
-  print ("Hola is Spanish for Hello")
+    print ("Hola is Spanish for Hello")
+
 
 def adios():
-  print ("Adios is Spanish for Bye")
+    print ("Adios is Spanish for Bye")
 
-menu = [hello,bye,hola,adios]
+
+menu = [hello, bye, hola, adios]
 menu[1]()
 
 # if/elseif/else

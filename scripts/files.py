@@ -25,7 +25,7 @@ if not os.path.exists(new_directory):
 # create file
 new_file = new_directory + '/' + 'new-file.txt'
 fo = open(new_file, 'w+')
-fo.write( "Python is a great language.\nYeah its great!!\n")
+fo.write("Python is a great language.\nYeah its great!!\n")
 print("Name of the file: ", fo.name)
 fo.close()
 
